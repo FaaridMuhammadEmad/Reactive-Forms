@@ -19,4 +19,18 @@ export class AppComponent {
 
     })
   });
+
+  loadApiData(){
+    //accepts the formgroup type data
+    this.registrationForm.setValue({
+      userName:'Faarid Emad',
+      password:'test',
+      confirmPassword:'test',
+      address:{
+        city:'Karachi',
+        state:'Sindh',
+        postalCode:'7500'
+      }
+    });
+  }
 }
