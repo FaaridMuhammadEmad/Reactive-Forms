@@ -8,7 +8,15 @@
       <input [class.is-invalid]="registrationForm.get('userName')?.invalid && 
       registrationForm.get('userName')?.touched"
        formControlName="userName" type="text" class="form-control">
-    </div>
+       <!-- <small [class.d-none]="registrationForm.get('userName')?.valid || 
+       registrationForm.get('userName')?.untouched" class="text-danger">Username is required</small> -->
+        <div *ngIf="registrationForm.get('userName')?.invalid || 
+        registrationForm.get('userName')?.touched">
+          <small *ngIf="registrationForm.get('userName').errors?.required" class="text-danger">Username is required</small>
+          <!-- <small *ngIf="registrationForm.get('userName').errors?.minLength" class="text-danger">Minimum length should be 3</small> -->
+
+        </div>
+      </div>
     <div class="form-group">
       <label>Password</label>
       <input formControlName="password" type="password" class="form-control">

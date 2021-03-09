@@ -13,7 +13,7 @@ export class AppComponent {
   }
       
   registrationForm = this.fb.group({
-    userName:['Faarid',Validators.required],
+    userName:['Faarid',[Validators.required,Validators.minLength(3)]],
     password:[''],
     confirmPassword:[''],
     address: this.fb.group({
