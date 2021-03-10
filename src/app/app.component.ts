@@ -2,6 +2,8 @@ import { Component,OnInit } from '@angular/core';
 import {FormGroup,FormControl, FormBuilder,Validators,FormArray} from '@angular/forms';
 import { passwordValidator } from './shared/password.validator';
 import{forbiddenNameValidator} from './shared/username.validator'
+import {RegistrationService} from './registration.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'reactive-forms';
   registrationForm: any;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private _registrationService:RegistrationService){
     
   }
 
@@ -69,6 +71,11 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.registrationForm.value)
+    console.log(this.registrationForm.value);
+    this._registrationService.register(this.registrationForm.value)
+    .subscribe(
+      data => console.log("Success!", data),
+      error => console.log("Success!", error)
+    )
   }
 }

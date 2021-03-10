@@ -59,7 +59,7 @@
 
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button [disabled]="!registrationForm.valid" type="submit" class="btn btn-primary">Submit</button>
     <button type="submit" class="btn btn-secondary ml-4" (click)="loadApiData()">Load API Data</button>
 
   </form>
