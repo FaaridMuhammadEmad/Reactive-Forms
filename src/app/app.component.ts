@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import {FormGroup,FormControl, FormBuilder,Validators} from '@angular/forms';
+import { passwordValidator } from './shared/password.validator';
 import{forbiddenNameValidator} from './shared/username.validator'
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent {
       state:[''],
       postalCode:[''],
     })
-  })
+  }, {validator:passwordValidator});
 
   ngOnInit(): void {
     // console.log(this.registrationForm.get('userName')?.errors?.minLength)
