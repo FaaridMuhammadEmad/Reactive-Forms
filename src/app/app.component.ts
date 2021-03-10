@@ -7,31 +7,47 @@ import{forbiddenNameValidator} from './shared/username.validator'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'reactive-forms';
-  
+  registrationForm: any;
+
   constructor(private fb: FormBuilder){
     
   }
 
-  getUsername(){
-   return this.registrationForm.get('userName')
-  }
+  get userName(){
+   return this.registrationForm.get('userName') 
+  } 
       
-  registrationForm = this.fb.group({
-    userName:['Faarid',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/password/)]],
-    password:[''],
-    confirmPassword:[''],
-    address: this.fb.group({
-      city:['New York  '],
-      state:[''],
-      postalCode:[''],
-    })
-  }, {validator:passwordValidator});
+  get email(){
+    return this.registrationForm.get('email') 
+   } 
 
-  ngOnInit(): void {
-    // console.log(this.registrationForm.get('userName')?.errors?.minLength)
+  ngOnInit() {
+    this.registrationForm = this.fb.group({
+      userName:['Faarid',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/password/)]],
+      password:[''],
+      email:[''],
+      subscribe:[false],
+      confirmPassword:[''],
+      address: this.fb.group({
+        city:['New York  '],
+        state:[''],
+        postalCode:[''],
+      })
+    }, {validator:passwordValidator});
+
+    this.registrationForm.get('subscribe').valueChanges
+    .subscribe((checkedValue: any)=>{
+      const email = this.registrationForm.get('email');
+      if(checkedValue){
+        email.setValidators(Validators.required)
+      }else{
+        email.clearValidators();
       }
+      email.updateValueAndValidity();
+    })
+  }
 
   loadApiData(){
     //accepts the formgroup type data if setvalue else patchValue
