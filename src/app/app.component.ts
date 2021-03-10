@@ -27,22 +27,10 @@ export class AppComponent {
       postalCode:[''],
     })
   })
+
   ngOnInit(): void {
-    console.log("*****")
-    console.log(this.registrationForm.get('userName')?.errors?.minLength)
+    // console.log(this.registrationForm.get('userName')?.errors?.minLength)
       }
-
-  // registrationForm = new FormGroup({
-  //   userName:new FormControl('Faarid'),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  //   address: new FormGroup({
-  //     city: new FormControl(''),
-  //     state: new FormControl(''),  
-  //     postalCode: new FormControl (''),
-
-  //   })
-  // });
 
   loadApiData(){
     //accepts the formgroup type data if setvalue else patchValue
