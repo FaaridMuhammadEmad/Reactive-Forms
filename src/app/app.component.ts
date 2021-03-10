@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
-import {FormGroup,FormControl, FormBuilder,Validators} from '@angular/forms'
+import {FormGroup,FormControl, FormBuilder,Validators} from '@angular/forms';
+import{forbiddenNameValidator} from './shared/username.validator'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,9 +12,13 @@ export class AppComponent {
   constructor(private fb: FormBuilder){
     
   }
+
+  getUsername(){
+   return this.registrationForm.get('userName')
+  }
       
   registrationForm = this.fb.group({
-    userName:['Faarid',[Validators.required,Validators.minLength(3)]],
+    userName:['Faarid',[Validators.required,Validators.minLength(3),forbiddenNameValidator]],
     password:[''],
     confirmPassword:[''],
     address: this.fb.group({
@@ -23,8 +28,9 @@ export class AppComponent {
     })
   })
   ngOnInit(): void {
-  //  console.log(this.registrationForm.get('userName')?.invalid)
-    }
+    console.log("*****")
+    console.log(this.registrationForm.get('userName')?.errors?.minLength)
+      }
 
   // registrationForm = new FormGroup({
   //   userName:new FormControl('Faarid'),

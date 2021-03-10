@@ -5,18 +5,16 @@
 
     <div class="form-group">
       <label>Username</label>
-      <input [class.is-invalid]="registrationForm.get('userName')?.invalid && 
-      registrationForm.get('userName')?.touched"
+      <input [class.is-invalid]="getUsername()?.invalid && getUsername()?.touched"
        formControlName="userName" type="text" class="form-control">
-       <!-- <small [class.d-none]="registrationForm.get('userName')?.valid || 
-       registrationForm.get('userName')?.untouched" class="text-danger">Username is required</small> -->
-        <div *ngIf="registrationForm.get('userName')?.invalid || 
-        registrationForm.get('userName')?.touched">
-          <small *ngIf="registrationForm.get('userName').errors?.required" class="text-danger">Username is required</small>
-          <!-- <small *ngIf="registrationForm.get('userName').errors?.minLength" class="text-danger">Minimum length should be 3</small> -->
-
+       <div *ngIf="getUsername()?.invalid || getUsername()?.touched">
+          <small *ngIf="getUsername()?.errors?.required" class="text-danger">Username is required</small>
+          <small *ngIf="getUsername()?.errors?.minlength" class="text-danger">Name must be at least 3 characters long.</small>
+          <small *ngIf="getUsername()?.errors?.forbiddenName" class="text-danger">{{getUsername()?.errors?.forbiddenName.value}} not allowed.</small>
         </div>
-      </div>
+       
+    </div>
+
     <div class="form-group">
       <label>Password</label>
       <input formControlName="password" type="password" class="form-control">
